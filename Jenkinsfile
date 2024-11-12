@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/SaifeddineBENZAIED/nodejs_web-app.git'
+                git branch: 'main', url: 'https://github.com/SaifeddineBENZAIED/nodejs_web-app.git'
             }
         }
 
