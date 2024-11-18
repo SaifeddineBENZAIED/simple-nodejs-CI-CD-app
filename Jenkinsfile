@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                
+                echo 'k8s deploy'
             }
         }
 
