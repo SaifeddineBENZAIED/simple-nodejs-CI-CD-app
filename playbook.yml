@@ -1,0 +1,26 @@
+- name: Configurer Prometheus Alertmanager
+  hosts: localhost
+  tasks:
+    - name: Créer un répertoire pour Alertmanager
+      file:
+        path: /etc/prometheus/alertmanager
+        state: directory
+        mode: '0755'
+
+    - name: Copier le fichier de configuration Alertmanager
+      copy:
+        src: alertmanager.yml
+        dest: /etc/prometheus/alertmanager/alertmanager.yml
+        mode: '0644'
+
+    - name: Redémarrer le service Prometheus pour inclure Alertmanager
+      service:
+        name: prometheus
+        state: restarted
+
+    - name: Vérifier le statut de Prometheus
+      command: systemctl status prometheus
+      register: prometheus_status
+
+    - debug:
+        msg: "{{ prometheus_status.stdout }}"
