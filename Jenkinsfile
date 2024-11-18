@@ -50,10 +50,22 @@ pipeline {
             }
         }
 
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    docker.image('ansible/ansible:latest').inside {
+                        sh '''
+                        ansible --version
+                        ansible-playbook -i inventory.yml playbook.yml
+                        '''
+                    }
+                }
+            }
+        }
+
         stage('Monitor Application with Prometheus') {
             steps {
                 echo 'Monitoring application with Prometheus...'
-                // You can later extend this stage to include PromQL queries
             }
         }
     }
