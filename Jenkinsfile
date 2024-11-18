@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'saif1920/nodejs-web-app:latest'
-        KUBECONFIG_CRED_ID = 'kubeconfig-credentials'
     }
 
     stages {
@@ -40,7 +39,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig(credentialsId: KUBECONFIG_CRED_ID) {
+                withKubeConfig(credentialsId: kubeconfig-credentials) {
                     sh 'kubectl apply -f deployment.yaml'
                     sh 'kubectl apply -f service.yaml'
                 }
