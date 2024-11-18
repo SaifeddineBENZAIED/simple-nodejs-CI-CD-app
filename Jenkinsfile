@@ -13,12 +13,10 @@ pipeline {
             }
         }
 
-        stages {
-            stage('Test Docker Access') {
-                steps {
-                    sh 'docker --version'
-                    sh 'docker ps'
-                }
+        stage('Test Docker Access') {
+            steps {
+                sh 'docker --version'
+                sh 'docker ps'
             }
         }
 
