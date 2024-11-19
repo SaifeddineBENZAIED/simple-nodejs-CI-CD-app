@@ -39,21 +39,33 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                echo 'k8s deploy'
+                withKubeConfig(credentialsId: 'kubeconfig-cred') {
+                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl apply -f service.yaml'
+                }
             }
         }
 
         stage('Configure Monitoring with Prometheus') {
             steps {
                 script {
-                    echo 'conf prom'
+                    sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
+                    sh 'helm repo update'
+                    sh 'helm install prometheus prometheus-community/prometheus'
                 }
             }
         }
 
         stage('Run Ansible Playbook') {
             steps {
-                echo 'run ansible'
+                script {
+                    docker.image('ansible/ansible:latest').inside {
+                        sh '''
+                        ansible --version
+                        ansible-playbook -i inventory.yml playbook.yml
+                        '''
+                    }
+                }
             }
         }
 
