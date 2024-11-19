@@ -46,23 +46,14 @@ pipeline {
         stage('Configure Monitoring with Prometheus') {
             steps {
                 script {
-                    sh 'helm repo add prometheus-community https://prometheus-community.github.io/helm-charts'
-                    sh 'helm repo update'
-                    sh 'helm install prometheus prometheus-community/prometheus'
+                    echo 'conf prom'
                 }
             }
         }
 
         stage('Run Ansible Playbook') {
             steps {
-                script {
-                    docker.image('ansible/ansible:latest').inside {
-                        sh '''
-                        ansible --version
-                        ansible-playbook -i inventory.yml playbook.yml
-                        '''
-                    }
-                }
+                echo 'run ansible'
             }
         }
 
