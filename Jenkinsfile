@@ -53,11 +53,21 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withKubeConfig(credentialsId: 'kubeconfig-credentials_id') {
-                    sh 'kubectl cluster-info'
-                    sh 'echo "=== deployment.yaml ===" && cat deployment.yaml'
-                    sh 'kubectl apply -f deployment.yaml || echo "Deployment failed!"'
-                    sh 'echo "=== service.yaml ===" && cat service.yaml'
-                    sh 'kubectl apply -f service.yaml || echo "Service failed!"'
+                    sh '''
+                    echo "=== deployment.yaml ==="
+                    cat deployment.yaml
+                    echo "Validating deployment.yaml..."
+                    python3 -c "import yaml, sys; yaml.safe_load(sys.stdin)" < deployment.yaml || exit 1
+        
+                    echo "=== service.yaml ==="
+                    cat service.yaml
+                    echo "Validating service.yaml..."
+                    python3 -c "import yaml, sys; yaml.safe_load(sys.stdin)" < service.yaml || exit 1
+        
+                    echo "Applying resources to Kubernetes..."
+                    kubectl apply -f deployment.yaml || echo "Deployment failed!"
+                    kubectl apply -f service.yaml || echo "Service failed!"
+                    '''
                 }
             }
         }
