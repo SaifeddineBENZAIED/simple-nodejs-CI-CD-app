@@ -41,8 +41,10 @@ pipeline {
             steps {
                 withKubeConfig(credentialsId: 'kubeconfig-credentials_id') {
                     sh 'kubectl cluster-info'
-                    sh 'kubectl apply -f deployment.yaml || echo "Deployment failed, debugging deployment.yaml" && cat deployment.yaml'
-                    sh 'kubectl apply -f service.yaml || echo "Service failed, debugging service.yaml" && cat service.yaml'
+                    sh 'echo "=== deployment.yaml ===" && cat deployment.yaml'
+                    sh 'kubectl apply -f deployment.yaml || echo "Deployment failed!"'
+                    sh 'echo "=== service.yaml ===" && cat service.yaml'
+                    sh 'kubectl apply -f service.yaml || echo "Service failed!"'
                 }
             }
         }
