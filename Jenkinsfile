@@ -40,8 +40,9 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 withKubeConfig(credentialsId: 'kubeconfig-credentials_id') {
-                    sh 'kubectl apply -f deployment.yaml'
-                    sh 'kubectl apply -f service.yaml'
+                    sh 'kubectl cluster-info'
+                    sh 'kubectl apply -f deployment.yaml || echo "Deployment failed, debugging deployment.yaml" && cat deployment.yaml'
+                    sh 'kubectl apply -f service.yaml || echo "Service failed, debugging service.yaml" && cat service.yaml'
                 }
             }
         }
