@@ -52,7 +52,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig(credentialsId: 'kubeconfig-credentials_id') {
+                withKubeConfig(credentialsId: 'kubeconfig-credentials') {
                     sh '''
                     echo "=== deployment.yaml ==="
                     cat deployment.yaml
