@@ -39,8 +39,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml --kubeconfig=/E:/kubeconfig'
-                sh 'kubectl apply -f service.yaml --force --kubeconfig=/E:/kubeconfig'
+                sh 'kubectl apply -f deployment.yaml --kubeconfig=E:/kubeconfig'
+                sh 'kubectl apply -f service.yaml --force --kubeconfig=E:/kubeconfig'
             }
         }
 
