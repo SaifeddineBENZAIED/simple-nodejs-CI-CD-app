@@ -37,38 +37,10 @@ pipeline {
             }
         }
 
-        stage('Install kubectl') {
-            steps {
-                sh '''
-                curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-                chmod +x kubectl
-                mkdir -p /var/jenkins_home/tools
-                mv kubectl /var/jenkins_home/tools/
-                export PATH=$PATH:/var/jenkins_home/tools
-                kubectl version --client
-                '''
-            }
-        }
-
         stage('Deploy to Kubernetes') {
             steps {
-                withKubeConfig(credentialsId: 'kubeconfig-credentials2') {
-                    sh '''
-                    echo "=== deployment.yaml ==="
-                    cat deployment.yaml
-                    echo "Validating deployment.yaml..."
-                    python3 -c "import yaml, sys; yaml.safe_load(sys.stdin)" < deployment.yaml || exit 1
-        
-                    echo "=== service.yaml ==="
-                    cat service.yaml
-                    echo "Validating service.yaml..."
-                    python3 -c "import yaml, sys; yaml.safe_load(sys.stdin)" < service.yaml || exit 1
-        
-                    echo "Applying resources to Kubernetes..."
-                    kubectl apply -f deployment.yaml || echo "Deployment failed!"
-                    kubectl apply -f service.yaml || echo "Service failed!"
-                    '''
-                }
+                kubernetesDeploy (configs: 'deployment.yaml',kubeconfigId: 'kubeconfigcred')
+                kubernetesDeploy (configs: 'service.yaml',kubeconfigId: 'kubeconfigcred')
             }
         }
 
