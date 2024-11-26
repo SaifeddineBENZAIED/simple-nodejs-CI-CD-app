@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'saif1920/nodejs-web-app:latest'
+        KUBECONFIG = '/root/.kube/config'
     }
 
     stages {
@@ -39,8 +40,20 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml --kubeconfig=/root/.kube/config'
-                sh 'kubectl apply -f service.yaml --force --kubeconfig=/root/.kube/config'
+                script {
+                    // Appliquer les manifests Kubernetes
+                    sh "kubectl apply -f deployment.yaml --kubeconfig=${KUBECONFIG}"
+                    sh "kubectl apply -f service.yaml --kubeconfig=${KUBECONFIG}"
+                }
+            }
+        }
+
+        stage('Monitor Pods') {
+            steps {
+                script {
+                    // Vérifier les pods déployés
+                    sh "kubectl get pods --kubeconfig=${KUBECONFIG}"
+                }
             }
         }
 
