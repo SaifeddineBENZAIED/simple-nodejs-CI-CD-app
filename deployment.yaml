@@ -16,4 +16,4 @@ spec:
       - name: web-app
         image: saif1920/nodejs-web-app:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 3005
