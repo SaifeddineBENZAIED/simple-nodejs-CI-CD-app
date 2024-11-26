@@ -57,6 +57,12 @@ pipeline {
             }
         }
 
+        stage('Verify Helm Installation') {
+            steps {
+                sh 'helm version'
+            }
+        }
+
         stage('Configure Monitoring with Prometheus') {
             steps {
                 script {
