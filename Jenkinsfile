@@ -39,8 +39,8 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml --kubeconfig=/C:/Users/benzaied saif/.kube/config'
-                sh 'kubectl apply -f service.yaml --force --kubeconfig=/C:/Users/benzaied saif/.kube/config'
+                sh 'kubectl apply -f deployment.yaml --kubeconfig=/C:/Users/benzaied\ saif/.kube/config'
+                sh 'kubectl apply -f service.yaml --force --kubeconfig=/C:/Users/benzaied\ saif/.kube/config'
             }
         }
 
