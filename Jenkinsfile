@@ -15,7 +15,6 @@ pipeline {
 
         stage('Test Docker Access') {
             steps {
-                sh 'chmod 666 /var/run/docker.sock'
                 sh 'docker --version'
                 sh 'docker ps'
             }
