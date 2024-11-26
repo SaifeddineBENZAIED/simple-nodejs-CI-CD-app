@@ -76,7 +76,7 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                    docker.image('ansible/ansible:latest').inside {
+                    docker.image('ansible/ansible').inside {
                         sh '''
                         ansible --version
                         ansible-playbook -i inventory.yml playbook.yml
