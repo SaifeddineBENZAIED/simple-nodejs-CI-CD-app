@@ -39,7 +39,7 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment.yaml --kubeconfig=/root/.kube/config'
+                sh 'kubectl apply -f deployment.yaml --kubeconfig=/E:/.kube/config'
                 sh 'kubectl apply -f service.yaml --force --kubeconfig=/root/.kube/config'
             }
         }
