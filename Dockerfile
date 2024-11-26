@@ -7,9 +7,6 @@ WORKDIR /app
 # Copier package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install
-
 # Copier tout le reste
 COPY . .
 
@@ -17,4 +14,4 @@ COPY . .
 EXPOSE 3000
 
 # Démarrer l'application
-CMD ["npm", "start"]
+CMD ["node","src/app.js"]
