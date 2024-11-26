@@ -1,2 +1,2 @@
-exports.port = 8080;
+exports.port = 8090;
 exports.dataDir = `${__dirname}/../data`;
