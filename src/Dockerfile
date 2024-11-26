@@ -1,19 +1,16 @@
 # Utiliser une image officielle Node.js comme base
 FROM node:16
 
-# Définir le répertoire de travail à la racine de l'application
+# Définir le répertoire de travail
 WORKDIR /app
-
-# Copier les fichiers package.json et package-lock.json pour installer les dépendances
-COPY package*.json ./
-
-# Installer les dépendances Node.js
-RUN npm install
 
 # Copier tout le contenu du projet dans le conteneur
 COPY . .
 
-# Exposer le port sur lequel votre application écoutera
+# Installer les dépendances manuellement si elles sont présentes dans votre projet
+RUN npm install src/lib  # Remplacez par le chemin des modules nécessaires si inclus dans le projet
+
+# Exposer le port de l'application
 EXPOSE 3000
 
 # Définir la commande de démarrage
