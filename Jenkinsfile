@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'saif1920/nodejs-web-app:latest'
-        KUBECONFIG = '/root/.kube/config'
+        KUBECONFIG = '/var/jenkins_home/.kube/config'
     }
 
     stages {
