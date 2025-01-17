@@ -36,7 +36,7 @@ Ensure the following are installed on your machine:
 ### Local Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/simple-nodejs-cicd-app.git
+   git clone https://github.com/SaifeddineBENZAIED/simple-nodejs-cicd-app.git
    cd simple-nodejs-cicd-app
 Install dependencies:
 bash
