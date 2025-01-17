@@ -99,12 +99,3 @@ Feel free to contribute by submitting a pull request. Suggestions for improvemen
 
 License
 This project is licensed under the MIT License.
-
-
-### Highlights of this README:
-1. **Clear Project Goals**: Describes the purpose and features of the repository concisely.
-2. **Comprehensive Setup Instructions**: Includes steps for local setup, CI/CD pipeline, and monitoring.
-3. **Structured Sections**: Organized into prerequisites, setup, and deployment for ease of use.
-4. **Extensibility**: Encourages contributions and highlights areas for future improvement. 
-
-This README provides a strong foundation for presenting your project on GitHub.
