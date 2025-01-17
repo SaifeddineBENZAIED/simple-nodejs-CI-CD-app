@@ -100,9 +100,6 @@ Feel free to contribute by submitting a pull request. Suggestions for improvemen
 License
 This project is licensed under the MIT License.
 
-markdown
-Copier
-Modifier
 
 ### Highlights of this README:
 1. **Clear Project Goals**: Describes the purpose and features of the repository concisely.
